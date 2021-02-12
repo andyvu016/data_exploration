@@ -183,7 +183,9 @@ outbreak <- outbreak_raw %>%
   mutate(outbreak_or_sporadic = str_replace_all(outbreak_or_sporadic, 
                                     "OB Associated", "Outbreak associated")) %>%
   group_by(episode_week) %>% 
-  mutate(total_cases = sum(cases))
+  mutate(total_cases = sum(cases)) %>% 
+  mutate(outbreak_or_sporadic = fct_relevel(outbreak_or_sporadic, 
+                                    "Outbreak associated", after = 1))
 ```
 
 \newpage
