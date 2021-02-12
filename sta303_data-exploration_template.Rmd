@@ -38,7 +38,7 @@ library(ggthemes)
 library(lubridate)
 
 # Set so that long lines in R will be wrapped:
-knitr::opts_chunk$set(tidy.opts=list(width.cutoff=80), echo = FALSE)
+knitr::opts_chunk$set(tidy.opts=list(width.cutoff=80), echo = TRUE, warning = FALSE)
 ```
 
 
@@ -141,7 +141,7 @@ Neighbourhood: `r date_nbhood[1,1]`.
 # Task 1: Daily cases
 ## Data wrangling
 
-```{r cases_dw, echo = TRUE}
+```{r cases_dw}
 reported <- reported_raw %>% 
   mutate_if(is.numeric, replace_na, replace = 0) %>% 
   mutate(reported_date = date(reported_date)) %>% 
@@ -153,7 +153,7 @@ reported <- reported_raw %>%
 \newpage
 ## Data visualization
 
-```{r cases_vis, warning = FALSE}
+```{r cases_vis}
 reported %>%
   ggplot(aes(x = reported_date, y = case_count, fill = status)) +
   geom_bar(stat = "identity") +
@@ -161,7 +161,7 @@ reported %>%
                limits = c(date("2020-01-01"), Sys.Date())) +
   theme_minimal() +
   labs(title = "Cases reported by day in Toronto, Canada",
-       subtitle = "Confirmed and probable cases”.",
+       subtitle = "Confirmed and probable cases",
        x = "Date",
        y = "Case count",
        caption = str_c("Created by: Andy Vu for STA303/1002, U of T\n", 
@@ -178,14 +178,35 @@ reported %>%
 
 
 ```{r outbreak_dw}
-
+outbreak <- outbreak_raw %>% 
+  mutate(episode_week = date(episode_week)) %>% 
+  mutate(outbreak_or_sporadic = str_replace_all(outbreak_or_sporadic, 
+                                    "OB Associated", "Outbreak associated")) %>%
+  group_by(episode_week) %>% 
+  mutate(total_cases = sum(cases))
 ```
 
 \newpage
 ## Data visualization
 
 ```{r outbreak_vis}
-
+outbreak %>%
+  ggplot(aes(x = episode_week, y = cases, fill = outbreak_or_sporadic)) +
+  geom_bar(stat = "identity") +
+  scale_x_date(labels = scales::date_format("%d %b %y"), 
+               limits = c(date("2020-01-01"), Sys.Date()+7)) +
+  scale_y_continuous(limits = c(0, max(outbreak$total_cases))) +
+  theme_minimal() +
+  labs(title = "Cases by outbreak type and week in Toronto, Canada",
+       subtitle = "Confirmed and probable cases",
+       x = "Date",
+       y = "Case count",
+       caption = str_c("Created by: Andy Vu for STA303/1002, U of T\n", 
+                       "Source: Ontario Ministry of Health",
+                       "Integrated Public Health Information System and CORES\n", 
+                       date_daily[1,1])) +
+  theme(legend.title = element_blank(), legend.position = c(0.15, 0.8)) +
+  scale_fill_manual(values = c("#86BCB6", "#B9CA5D"))
 ```
 
 \newpage
