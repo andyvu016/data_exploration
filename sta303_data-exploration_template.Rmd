@@ -216,19 +216,40 @@ outbreak %>%
 ## Data wrangling: part 1
 
 ```{r nbhood_dw_1}
-
+income <- nbhood_profile %>% 
+  filter(`_id` == 1143) %>% 
+  pivot_longer(-c(`_id`, Category, Topic, `Data Source`, Characteristic, `City of Toronto`), 
+               names_to = "neighbourhood_name", values_to = "percentage") %>% 
+  mutate(percentage = parse_number(percentage))
 ```
 
 ## Data wrangling: part 2
 
 ```{r nbhood_dw_2}
-
+nbhoods_all <- nbhoods_shape_raw %>% 
+  mutate(neighbourhood_name = str_remove(AREA_NAME, "\\s\\(\\d+\\)$")) %>% 
+  left_join(nbhood_raw, by = c("neighbourhood_name" = "neighbourhood_name")) %>% 
+  left_join(income, by = c("neighbourhood_name" = "neighbourhood_name")) %>%
+  mutate_if(is.numeric, replace_na, replace = 0) %>% 
+  rename(rate_per_100000 = rate_per_100_000_people)
 ```
 
 ## Data wrangling: part 3
 
 ```{r nbhood_dw_3}
-
+nbhoods_final <- nbhoods_all %>% 
+  mutate(med_inc = median(percentage)) %>% 
+  mutate(med_rate = median(rate_per_100000)) %>% 
+  mutate(nbhood_type = case_when(
+    percentage >= med_inc & rate_per_100000 >= med_rate ~ 
+      "Higher low income rate, higher case rate",
+    percentage >= med_inc & rate_per_100000 < med_rate ~ 
+      "Higher low income rate, lower case rate",
+    percentage < med_inc & rate_per_100000 >= med_rate ~ 
+      "Lower low income rate, higher case rate",
+    percentage < med_inc & rate_per_100000 < med_rate ~ 
+      "Lower low income rate, lower case rate"
+  ))
 ```
 
 \newpage

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2021.2.9)  11 FEB 2021 17:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2021.2.9)  12 FEB 2021 03:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -543,34 +543,42 @@ Package pdftex.def Info: sta303_data-exploration_template_files/figure-latex/ca
 ses_vis-1.pdf  used on input line 163.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [2 <./sta303_data-exploration_template_files/figure-latex/cases_vis-1.pdf>] [3]
-[4] [5] [6] 
+<sta303_data-exploration_template_files/figure-latex/outbreak_vis-1.pdf, id=81,
+ 469.755pt x 325.215pt>
+File: sta303_data-exploration_template_files/figure-latex/outbreak_vis-1.pdf Gr
+aphic file (type pdf)
+<use sta303_data-exploration_template_files/figure-latex/outbreak_vis-1.pdf>
+Package pdftex.def Info: sta303_data-exploration_template_files/figure-latex/ou
+tbreak_vis-1.pdf  used on input line 213.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[4 <./sta303_data-exploration_template_files/figure-latex/outbreak_vis-1.pdf>] 
+[5] [6] 
 AED: lastpage setting LastPage
-[7] (./sta303_data-exploration_template.aux)
+(./sta303_data-exploration_template.aux)
 Package rerunfilecheck Info: File `sta303_data-exploration_template.out' has no
 t changed.
 (rerunfilecheck)             Checksum: 6906D067B9950409C04AAA9B8E413BDD;1684.
  ) 
 Here is how much of TeX's memory you used:
- 10627 strings out of 481288
- 155926 string characters out of 5915721
- 466936 words of memory out of 5000000
- 27345 multiletter control sequences out of 15000+600000
- 422395 words of font info for 36 fonts, out of 8000000 for 9000
+ 10630 strings out of 481288
+ 156306 string characters out of 5915721
+ 469936 words of memory out of 5000000
+ 27349 multiletter control sequences out of 15000+600000
+ 422076 words of font info for 35 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 71i,11n,74p,330b,331s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,11n,74p,476b,332s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.en
 c}<c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx1
 2.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/l
 mr10.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/l
 m/lmro10.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/publ
 ic/lm/lmtk10.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/
-public/lm/lmtt10.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/ty
-pe1/public/lm/lmtti10.pfb>
-Output written on sta303_data-exploration_template.pdf (7 pages, 178710 bytes).
+public/lm/lmtt10.pfb>
+Output written on sta303_data-exploration_template.pdf (6 pages, 167605 bytes).
 
 PDF statistics:
- 139 PDF objects out of 1000 (max. 8388607)
- 120 compressed objects within 2 object streams
- 30 named destinations out of 1000 (max. 500000)
- 94 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 134 PDF objects out of 1000 (max. 8388607)
+ 115 compressed objects within 2 object streams
+ 29 named destinations out of 1000 (max. 500000)
+ 99 words of extra memory for PDF output out of 10000 (max. 10000000)
 
