@@ -218,8 +218,9 @@ outbreak %>%
 ```{r nbhood_dw_1}
 income <- nbhood_profile %>% 
   filter(`_id` == 1143) %>% 
-  pivot_longer(-c(`_id`, Category, Topic, `Data Source`, Characteristic, `City of Toronto`), 
-               names_to = "neighbourhood_name", values_to = "percentage") %>% 
+  pivot_longer(-c(`_id`, Category, Topic, `Data Source`, Characteristic, 
+                  `City of Toronto`), names_to = "neighbourhood_name", 
+               values_to = "percentage") %>% 
   mutate(percentage = parse_number(percentage))
 ```
 
@@ -256,25 +257,53 @@ nbhoods_final <- nbhoods_all %>%
 ## Data visualization
 
 ```{r neighbourhood_graphs_1, fig.height=4}
-
+ggplot(data = nbhoods_final) +
+  geom_sf(aes(fill = percentage)) +
+  theme_map() + 
+  theme(legend.position = "right") +
+  labs(title = "Percentage of 18 to 64 year olds living in a low income family (2015)",
+       subtitle = "Neighbourhoods of Toronto, Canada",
+       caption = str_c("Created by: Andy Vu for STA303/1002, U of T\n", 
+                       "Source: Census Profile 98−316−X2016001 via OpenData Toronto\n", 
+                       date_daily[1,1])) +
+  scale_fill_gradient(name= "% low income", low = "darkgreen", high = "lightgrey")
 ```
 
 \newpage
 
 ```{r neighbourhood_graphs_2, fig.height=4}
-
+ggplot(data = nbhoods_final) +
+  geom_sf(aes(fill = rate_per_100000)) +
+  theme_map() + 
+  theme(legend.position = "right") +
+  labs(title = "COVID−19 cases per 100,000, by neighbourhood in Toronto, Canada",
+       caption = str_c("Created by: Andy Vu for STA303/1002, U of T\n", 
+                       "Source: Ontario Ministry of Health",
+                       "Integrated Public Health Information System and CORES\n", 
+                       date_daily[1,1])) +
+  scale_fill_gradient(name= "Cases per 100,000 people", low = "white", high = "darkorange")
 ```
 
 \newpage
 
 ```{r neighbourhood_graphs_3, fig.height=4}
-
+ggplot(data = nbhoods_final) +
+  geom_sf(aes(fill = nbhood_type)) +
+  theme_map() + 
+  theme(legend.position = "right") +
+  labs(title = "COVID−19 cases and low-income status by neighbourhood in Toronto, Canada",
+       caption = str_c("Created by: Andy Vu for STA303/1002, U of T\n",
+                       "Income data source: Census Profile 98−316−X2016001 via OpenData Toronto\n",
+                       "COVID data source: Ontario Ministry of Health Integrated Public\n",
+                       "Health Information System and CORES\n", 
+                       date_daily[1,1])) +
+  scale_fill_brewer(name= "% of 18 to 64 year−olds in\nlow income families and\nCOVID−19 case rates", palette = "Set1")
 ```
 
 
 
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, echo = FALSE}
 # This chunk of code helps you prepare your assessment for submission on Crowdmark
 # This is optional. If it isn't working, you can do it manually/take another approach.
 
